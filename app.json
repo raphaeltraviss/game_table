@@ -1,0 +1,12 @@
+{
+  "name": "GameTable",
+  "displayName": "GameTable",
+  "expo": {
+    "name": "GameTable",
+    "slug": "GameTable",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
