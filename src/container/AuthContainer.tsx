@@ -16,6 +16,11 @@ export default function AuthContainer() {
 
   useEffect(() => {
     const authRegisterUnregister = auth().onAuthStateChanged(handleUserAuth);
+
+    return authRegisterUnregister;
+  });
+
+  const anonymousLogin = () => {
     auth()
       .signInAnonymously()
       .then(() => {
@@ -25,17 +30,34 @@ export default function AuthContainer() {
         if (error.code === 'auth/operation-not-allowed') {
           console.log('Enable anonymous in your firebase console.');
         }
-      });
 
-    return authRegisterUnregister;
-  });
+        console.error(error);
+      });
+  };
+
+  const createAndOrLoginUser = () => {
+    auth()
+      .createUserWithEmailAndPassword('jane.doe@example.com', 'SuperSecretPassword!')
+      .then(() => {
+        console.log('User account created & signed in!');
+      })
+      .catch(error => {
+        // @TODO: extract to error handler/logger
+        if (error.code === 'auth/email-already-in-use') {
+          console.log('That email address is already in use!');
+        }
+
+        if (error.code === 'auth/invalid-email') {
+          console.log('That email address is invalid!');
+        }
+
+        console.error(error);
+      });
+  };
+
 
   if (!didInitialize) return null;
-
-  if (user === null) {
-    return <View><Text>Login</Text></View>
-  }
-
+                            
   return (
     <View>
       { (user != null) ?
