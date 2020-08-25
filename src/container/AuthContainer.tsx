@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Button } from 'react-native';
 import auth from '@react-native-firebase/auth';
 
+import LoginForm from '../component/LoginForm';
 
 
 export default function AuthContainer() {
@@ -19,6 +20,12 @@ export default function AuthContainer() {
 
     return authRegisterUnregister;
   });
+
+  const logOut = () => {
+    auth()
+      .signOut()
+      .then(() => console.log('User signed out!'));
+  };
 
   const anonymousLogin = () => {
     auth()
@@ -63,8 +70,14 @@ export default function AuthContainer() {
       { (user != null) ?
         <Text>Welcome, {user.email}</Text>
         :
-        <Text>Login</Text> 
+        <LoginForm submitAction={() => console.log("login attempt")} /> 
       }
+      <Button
+        onPress={logOut}
+        title="Log Out"
+        color="#841584"
+        accessibilityLabel="Log out of your account on this device"
+      />
     </View>
 
   );
