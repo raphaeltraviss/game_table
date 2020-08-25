@@ -1,3 +1,5 @@
 type LoginFormProps = {
-  submitAction: () => void
+  loginAction: (arg1: string, arg2: string) => void
+  logoutAction: () => void
+  user: object | null
 }

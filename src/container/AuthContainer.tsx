@@ -42,9 +42,9 @@ export default function AuthContainer() {
       });
   };
 
-  const createAndOrLoginUser = () => {
+  const createAndOrLoginUser = (email: string, password: string) => {
     auth()
-      .createUserWithEmailAndPassword('jane.doe@example.com', 'SuperSecretPassword!')
+      .createUserWithEmailAndPassword(email, password)
       .then(() => {
         console.log('User account created & signed in!');
       })
@@ -70,14 +70,12 @@ export default function AuthContainer() {
       { (user != null) ?
         <Text>Welcome, {user.email}</Text>
         :
-        <LoginForm submitAction={() => console.log("login attempt")} /> 
+        <LoginForm
+          user={user}
+          loginAction={createAndOrLoginUser}
+          logoutAction={logOut}
+        /> 
       }
-      <Button
-        onPress={logOut}
-        title="Log Out"
-        color="#841584"
-        accessibilityLabel="Log out of your account on this device"
-      />
     </View>
 
   );
