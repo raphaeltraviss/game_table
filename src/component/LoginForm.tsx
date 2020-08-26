@@ -44,20 +44,30 @@ export default function LoginForm(props: LoginFormProps) {
     setValue('password', input);
   }
 
-  const login = () => {
-    props.loginAction('someemail@something.com', 'somepassword');
+  const login = (formData: any) => {
+    props.loginAction(formData.email, formData.password);
   }
 
   return (
     <View>
       <View>
         <Text>Email</Text>
-        <TextInput onChangeText={inputEmail} />
+        <TextInput
+          onChangeText={inputEmail}
+          autoCapitalize="none"
+          autoCompleteType="email"
+          textContentType="emailAddress"
+        />
         { errors.email && <Text>{errors.email.message}</Text> }
       </View>
       <View>
         <Text>Password</Text>
-        <TextInput onChangeText={inputPassword} />
+        <TextInput
+          onChangeText={inputPassword}
+          autoCapitalize="none"
+          autoCompleteType="password"
+          textContentType="password"
+        />
         { errors.password && <Text>{errors.password.message}</Text> }
       </View>
       <Button

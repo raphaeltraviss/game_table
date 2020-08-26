@@ -67,15 +67,12 @@ export default function AuthContainer() {
                             
   return (
     <View>
-      { (user != null) ?
-        <Text>Welcome, {user.email}</Text>
-        :
-        <LoginForm
-          user={user}
-          loginAction={createAndOrLoginUser}
-          logoutAction={logOut}
-        /> 
-      }
+      { user && <Text>Welcome, {user.email}</Text> }
+      <LoginForm
+        user={user}
+        loginAction={createAndOrLoginUser}
+        logoutAction={logOut}
+      /> 
     </View>
 
   );
