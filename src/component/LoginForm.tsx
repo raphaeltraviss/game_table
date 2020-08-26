@@ -26,7 +26,7 @@ export default function LoginForm(props: LoginFormProps) {
     });
   }, [register]);
 
-  if (!props.user) {
+  if (props.user) {
     return (
       <Button
         onPress={props.logoutAction}
@@ -53,12 +53,12 @@ export default function LoginForm(props: LoginFormProps) {
       <View>
         <Text>Email</Text>
         <TextInput onChangeText={inputEmail} />
-        { errors.email && errors.email.message }
+        { errors.email && <Text>{errors.email.message}</Text> }
       </View>
       <View>
         <Text>Password</Text>
         <TextInput onChangeText={inputPassword} />
-        { errors.password && errors.password.message }
+        { errors.password && <Text>{errors.password.message}</Text> }
       </View>
       <Button
         onPress={handleSubmit(login)}
