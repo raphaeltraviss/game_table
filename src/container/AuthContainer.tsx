@@ -3,11 +3,13 @@ import { View, Text, Button } from 'react-native';
 import auth from '@react-native-firebase/auth';
 
 import LoginForm from '../component/LoginForm';
+import FirebaseErrorMessage from '../component/FirebaseErrorMessage';
 
 
 export default function AuthContainer() {
   const [didInitialize, setDidInitialize] = useState(false);
   const [user, setUser] = useState(null);
+  const [firebaseAuthError, setFirebaseAuthError] = useState(null);
 
   // @TODO: Firebase auth user type information?
   function handleUserAuth(user: any) {
@@ -32,14 +34,9 @@ export default function AuthContainer() {
       .signInAnonymously()
       .then(() => {
         console.log('User signed in anonymously');
+        setFirebaseAuthError(null);
       })
-      .catch(error => {
-        if (error.code === 'auth/operation-not-allowed') {
-          console.log('Enable anonymous in your firebase console.');
-        }
-
-        console.error(error);
-      });
+      .catch(setFirebaseAuthError);
   };
 
   const createAndOrLoginUser = (email: string, password: string) => {
@@ -47,19 +44,9 @@ export default function AuthContainer() {
       .createUserWithEmailAndPassword(email, password)
       .then(() => {
         console.log('User account created & signed in!');
+        setFirebaseAuthError(null);
       })
-      .catch(error => {
-        // @TODO: extract to error handler/logger
-        if (error.code === 'auth/email-already-in-use') {
-          console.log('That email address is already in use!');
-        }
-
-        if (error.code === 'auth/invalid-email') {
-          console.log('That email address is invalid!');
-        }
-
-        console.error(error);
-      });
+      .catch(setFirebaseAuthError);
   };
 
 
@@ -73,6 +60,7 @@ export default function AuthContainer() {
         loginAction={createAndOrLoginUser}
         logoutAction={logOut}
       /> 
+      <FirebaseErrorMessage error={firebaseAuthError} />
     </View>
 
   );
