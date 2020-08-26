@@ -2,9 +2,14 @@ import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { Text, View, TextInput, Button } from 'react-native';
 
+import tw from 'tailwind-rn';
+
 
 export default function LoginForm(props: LoginFormProps) {
   const { register, handleSubmit, setValue, errors } = useForm();
+
+  const formStyle = tw('flex-col p-6 w-full');
+  const formFieldStyle = tw('p-4 mt-4 mb-4 rounded-lg bg-gray-100 w-full');
 
   useEffect(() => {
     register("email", {
@@ -49,8 +54,8 @@ export default function LoginForm(props: LoginFormProps) {
   }
 
   return (
-    <View>
-      <View>
+    <View style={formStyle}>
+      <View style={formFieldStyle}>
         <Text>Email</Text>
         <TextInput
           onChangeText={inputEmail}
@@ -60,7 +65,7 @@ export default function LoginForm(props: LoginFormProps) {
         />
         { errors.email && <Text>{errors.email.message}</Text> }
       </View>
-      <View>
+      <View style={formFieldStyle}>
         <Text>Password</Text>
         <TextInput
           onChangeText={inputPassword}

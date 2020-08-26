@@ -5,11 +5,15 @@ import auth from '@react-native-firebase/auth';
 import LoginForm from '../component/LoginForm';
 import FirebaseErrorMessage from '../component/FirebaseErrorMessage';
 
+import tw from 'tailwind-rn';
+
 
 export default function AuthContainer() {
   const [didInitialize, setDidInitialize] = useState(false);
   const [user, setUser] = useState(null);
   const [firebaseAuthError, setFirebaseAuthError] = useState(null);
+
+  const containerStyle = tw('w-full');
 
   // @TODO: Firebase auth user type information?
   function handleUserAuth(user: any) {
@@ -53,7 +57,7 @@ export default function AuthContainer() {
   if (!didInitialize) return null;
                             
   return (
-    <View>
+    <View style={containerStyle}>
       { user && <Text>Welcome, {user.email}</Text> }
       <LoginForm
         user={user}
