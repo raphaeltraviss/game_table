@@ -19,7 +19,7 @@ export default function App() {
     <NavigationContainer>
         <Stack.Navigator initialRouteName="Auth">
           <Stack.Screen name="Auth" component={AuthScreen} />
-          <Stack.Screen name="Main" component={ContentScreen} />
+          <Stack.Screen name="Content" component={ContentScreen} />
         </Stack.Navigator>
       <StatusBar style="auto" />
     </NavigationContainer>

@@ -8,7 +8,7 @@ import FirebaseErrorMessage from '../component/FirebaseErrorMessage';
 import tw from 'tailwind-rn';
 
 
-export default function AuthScreen() {
+export default function AuthScreen(props) {
   const [didInitialize, setDidInitialize] = useState(false);
   const [user, setUser] = useState(null);
   const [firebaseAuthError, setFirebaseAuthError] = useState(null);
@@ -49,6 +49,7 @@ export default function AuthScreen() {
       .then(() => {
         console.log('User account created & signed in!');
         setFirebaseAuthError(null);
+        props.navigation.navigate('Content');
       })
       .catch(setFirebaseAuthError);
   };
