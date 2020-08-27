@@ -8,7 +8,7 @@ import FirebaseErrorMessage from '../component/FirebaseErrorMessage';
 import tw from 'tailwind-rn';
 
 
-export default function AuthContainer() {
+export default function AuthScreen() {
   const [didInitialize, setDidInitialize] = useState(false);
   const [user, setUser] = useState(null);
   const [firebaseAuthError, setFirebaseAuthError] = useState(null);
