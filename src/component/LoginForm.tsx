@@ -9,7 +9,9 @@ export default function LoginForm(props: LoginFormProps) {
   const { register, handleSubmit, setValue, errors } = useForm();
 
   const formStyle = tw('flex-col p-6 w-full');
-  const formFieldStyle = tw('p-4 mt-4 mb-4 rounded-lg bg-gray-100 w-full');
+  const formFieldStyle = tw('p-4 mt-4 mb-4 rounded-lg bg-white w-full');
+  const inputLabelStyle = tw('text-xs uppercase mb-2 text-gray-700');
+  const inputStyle = tw('p-2 border-b-2 border-gray-400 text-lg rounded-sm bg-gray-100');
 
   useEffect(() => {
     register("email", {
@@ -53,11 +55,13 @@ export default function LoginForm(props: LoginFormProps) {
     props.loginAction(formData.email, formData.password);
   }
 
+
   return (
     <View style={formStyle}>
       <View style={formFieldStyle}>
-        <Text>Email</Text>
+        <Text style={inputLabelStyle}>Email</Text>
         <TextInput
+          style={inputStyle}
           onChangeText={inputEmail}
           autoCapitalize="none"
           autoCompleteType="email"
@@ -66,8 +70,9 @@ export default function LoginForm(props: LoginFormProps) {
         { errors.email && <Text>{errors.email.message}</Text> }
       </View>
       <View style={formFieldStyle}>
-        <Text>Password</Text>
+        <Text style={inputLabelStyle}>Password</Text>
         <TextInput
+          style={inputStyle}
           onChangeText={inputPassword}
           autoCapitalize="none"
           autoCompleteType="password"
@@ -78,7 +83,6 @@ export default function LoginForm(props: LoginFormProps) {
       <Button
         onPress={handleSubmit(login)}
         title="Log In"
-        color="gainsboro"
         accessibilityLabel="Log in to your account on this device"
       />
     </View>
